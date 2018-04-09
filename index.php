@@ -12,9 +12,9 @@ and open the template in the editor.
     <body>
         <?php
 echo  error_reporting(E_ALL);
-       
-require 'config.php';
-        require 'Mail.php';
+//       
+//require 'config.php';
+//        require 'Mail.php';
         // put your code here
         ?>
     </body>

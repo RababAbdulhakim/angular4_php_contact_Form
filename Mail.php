@@ -11,6 +11,9 @@
  *
  * @author rabab
  */
+echo  error_reporting(E_ALL);
+
+require 'config.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -23,9 +26,12 @@ require 'PHPMailer/src/SMTP.php';
 $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 try {
     //Server settings
-    $mail->SMTPDebug = 3;                                 // Enable verbose debug output
+    $mail->SMTPDebug = 3;
+    $mail->Debugoutput = 'html';
+    
+// Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP
-    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+    $mail->Host = 'smtp.gmail.com';                 // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = 'rababh653@gmail.com';                 // SMTP username
     $mail->Password = 'rabab121212';                           // SMTP password
@@ -33,21 +39,28 @@ try {
     $mail->Port = 587;                                    // TCP port to connect to
 
     //Recipients
-    $mail->setFrom('from@example.com', 'Mailer');
-    $mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
-    $mail->addAddress('ellen@example.com');               // Name is optional
-    $mail->addReplyTo('rabab.abdulhakim.hussein@gmail.com', 'Information');
-    $mail->addCC('cc@example.com');
-    $mail->addBCC('bcc@example.com');
+    $mail->setFrom( $_POST['email'],  $_POST['name']);
+    $mail->addAddress('rabab.abdulhakim.hussein@gmail.com', 'Joe User');     // Add a recipient
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->Subject = $_POST['message_address'];
+    $mail->Body    = $_POST['address'];
+    $mail->AltBody = $_POST['address'];
 
     $mail->send();
     echo 'Message has been sent';
 } catch (Exception $e) {
     echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 }
+
+        $sql = "INSERT INTO email (`name`, `email`, `message_address`, `message` , `phone`)
+       VALUES ('" . $_POST['name'] . "', '" . $_POST['email'] . "','" . $_POST['message_address'] . "','" . $_POST['message'] . "','" . $_POST['phone'] . "')";
+        if (mysqli_query($conn, $sql)) {
+            echo "New record created successfully";
+        } else {
+            echo mysqli_error($conn);
+        }
+    
+    mysqli_close($conn);
+
