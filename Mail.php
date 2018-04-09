@@ -11,6 +11,8 @@
  *
  * @author rabab
  */
+
+//send mail functionality
 echo  error_reporting(E_ALL);
 
 require 'config.php';
@@ -50,10 +52,7 @@ try {
 
     $mail->send();
     echo 'Message has been sent';
-} catch (Exception $e) {
-    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
-}
-
+    //send to the database
         $sql = "INSERT INTO email (`name`, `email`, `message_address`, `message` , `phone`)
        VALUES ('" . $_POST['name'] . "', '" . $_POST['email'] . "','" . $_POST['message_address'] . "','" . $_POST['message'] . "','" . $_POST['phone'] . "')";
         if (mysqli_query($conn, $sql)) {
@@ -63,4 +62,12 @@ try {
         }
     
     mysqli_close($conn);
+    
+} catch (Exception $e) {
+    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+}
 
+
+
+
+    
