@@ -1,18 +1,20 @@
 
 
 <div  class="h1">List of emails</div>
+<div [innerHTML]="alert"></div>
+
 <div class="container">
 
     <div class="list-group">
         <div *ngFor="let datas of data.info" >
-            <a   href="#" class="list-group-item">
+            <div   href="#" class="list-group-item">
 
                 {{datas.name}}   
                 
                   <span class="badge"><a  data-toggle="modal" data-target="#{{datas.id}}" href="#{{datas.id}}">Reply</a></span>
                 <span class="badge"><a  data-toggle="modal" data-target="#detail{{datas.id}}" href="#detail{{datas.id}}">View</a></span>
                     
-            </a>
+            </div>
 
 
             <div class="modal fade" id="{{datas.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -37,13 +39,13 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                          <button class="btn btn-primary" type="submit" [disabled]="!REPLYForm.form.valid">Submit</button>
+                          <button class="btn btn-primary notclicked" type="submit" [disabled]="!REPLYForm.form.valid">Submit</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default notclicked"  (click)="updatedata()" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

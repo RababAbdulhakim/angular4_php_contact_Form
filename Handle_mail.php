@@ -45,16 +45,17 @@ class Handle_mail {
             $mail->Port = 587;                                    // TCP port to connect to
             //Recipients.
             $mail->setFrom($email, $email);
-            $mail->addAddress('rabab.abdulhakim.hussein@gmail.com', 'Joe User');     // Add a recipient
+            $mail->addAddress($email, '$name');     // Add a recipient
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = $message;
-            $mail->Body = $message_address;
-            $mail->AltBody = $message_address;
+             $mail->Body = " Message $message_address From $name ;<br> info: email $email , phone $phone <br> Message $message";
+            $mail->AltBody = " Message $message_address From $name ;<br> info: email $email , phone $phone <br> Message $message";
             $mail->SMTPSecure = 'tls';
             $mail->Host = 'smtp.gmail.com';
 
             $mail->send();
+            
             echo 'Message has been sent';
             //send to the database
         } catch (Exception $e) {
@@ -132,26 +133,6 @@ class Handle_mail {
         return json_encode($json);
     }
     
-   public function get_element($id) {
-    require 'config.php';
-    
-    $sql = "SELECT `id`, `name`, `email`, `message_address`, `message`, `phone` FROM `email` WHERE id = ".$id;
-
-        $result = mysqli_query($conn, $sql);
-        $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-        if ($rows) {
-            $json = array("status" => 1, "info" => $rows);
-        } else {
-            $json = array("status" => 0, "msg" => "email here");
-        }
-        header("Access-Control-Allow-Origin: *");
-        header("Content-Type: application/json; charset=UTF-8");
-        header("Access-Control-Allow-Methods: Get");
-        header("Access-Control-Max-Age: 3600");
-        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-        header('Content-type: application/json');
-        return json_encode($json);
-    } 
+  
 
 }

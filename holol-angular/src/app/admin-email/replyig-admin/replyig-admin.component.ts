@@ -5,7 +5,7 @@ import { Emails } from './../../Emails';
 import { Http } from '@angular/http';
 
 import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/map';
+import { catchError, map, tap } from 'rxjs/operators';
 
 
 @Component({
@@ -15,10 +15,9 @@ import 'rxjs/add/operator/map';
 })
 export class ReplyigAdminComponent implements OnInit {
 id: number ;
-  emails: Emails[];
-    email: Emails;
+  Emails = new Emails();
 data:any ={} ;
-  constructor(private Emails:HandleMailsService, public http: HttpClient ) { 
+  constructor(public http: HttpClient ) { 
   
       this.getelement(this.id);
    
@@ -32,7 +31,11 @@ getelement(id: number){
 
             });
   }
-  
+    getHero(id: number){
+        
+        return this.http.get(`http://localhost/Holo/admin/${id}`).subscribe(response => console.log(response));
+
+  }
 
  
 

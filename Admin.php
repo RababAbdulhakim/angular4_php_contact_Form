@@ -13,15 +13,11 @@
  */
 include 'Handle_mail.php';
 
+class Admin  extends Handle_mail{
+    //put your code here
+    public function Insert(){
 
-if($_SERVER['REQUEST_METHOD'] === 'Get'){
-         $get  = new Handle_mail();
-         $json = file_get_contents('php://input');
-         $data = json_decode($json);
-         var_dump($get->get_element($id));
-         
-}elseif($_SERVER['REQUEST_METHOD'] === 'Post'){
-                require 'config.php';
+            require 'config.php';
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
@@ -31,12 +27,11 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 $json = file_get_contents('php://input');
 $data = json_decode($json);
 header('Content-Type: application/json');
-return($data);
-      $message_ifo = "SELECT * FROM `email` where id =  ". $message_id;
+      $message_ifo = "SELECT * FROM `email` where id =  ". $data->message_id;
                $result = mysqli_query($conn, $message_ifo);
                 $rows = mysqli_fetch_all($result,MYSQLI_ASSOC); 
                 
-                if(count($rows) > 0){
+                if($rows > 0){
               $message_input =$data->message;
                $message_id_input =$data->message_id;
 
@@ -48,7 +43,7 @@ return($data);
        VALUES ('" . $message . "', '" . $message_id . "')";
         if (mysqli_query($conn, $sql)) {
             echo "New record created successfully";
-                  return json_encode(array("response" => "true"));
+        
 
               $mail = new Handle_mail();
             $mail->Send_Mail($rows[0]['name'], $rows[0]['email'], $rows[0]['message_address'], $rows[0]['message'], $rows[0]['phone']);
@@ -60,5 +55,9 @@ return($data);
         
     }else{
         return json_encode(array("response" => "false"));
+    }
+    }
 }
-}
+
+$replymail = new Admin();
+$replymail->Insert();

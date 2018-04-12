@@ -9,8 +9,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable()
 export class HandleMailsService {
     
-           emails$: Observable<Emails[]>;
-
 
 
   public id: number;
@@ -22,29 +20,8 @@ export class HandleMailsService {
 GetData() {
     return this.http.get('http://localhost/Holo/index');
   }
- getHeroes (): Observable<Emails[]> {
-  return this.http.get<Emails[]>(this.http://localhost/Holo/index);
-
 }
 
- 
-  UpdateData(){
-       let data = this.http.get('http://localhost/Holo/index').map((data)=>{
-        return data.json();
-    }).do((data)=>{
-        this.emails$.next(data);
-    })
-  }
-  
-  deleteData (email: Email | number): Observable<Email> {
-  const id = typeof email === 'number' ? email : email.id;
-  const url = `${this.heroesUrl}/${id}`;
-
-  return this.http.delete<Hero>(url, httpOptions).pipe(
-    tap(_ => this.log(`deleted hero id=${id}`)),
-    catchError(this.handleError<Hero>('deleteHero'))
-  );
-}
 
 }
 

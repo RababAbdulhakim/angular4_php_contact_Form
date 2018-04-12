@@ -12,7 +12,7 @@ import { Emails } from '../Emails';
   templateUrl: './user-email.component.html',
   styleUrls: ['./user-email.component.css']
 })
-export class UserEmailComponent implements OnChanges  {
+export class UserEmailComponent implements OnInit  {
 
   title = 'app';
    public id: number;

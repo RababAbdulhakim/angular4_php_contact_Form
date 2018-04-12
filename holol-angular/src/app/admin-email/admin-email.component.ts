@@ -16,7 +16,8 @@ export class AdminEmailComponent implements OnInit {
     data: any = {};
     public message: string;
     interval: any;
-    
+     button;
+    alert;
     
     constructor(private Emails: HandleMailsService, private http: HttpClient) {
         this.GETdata();
@@ -45,6 +46,7 @@ export class AdminEmailComponent implements OnInit {
             .subscribe(
             (data) => {
                 console.log(data);
+                this.updatedata()
             },
             err => {
                 console.log("Error occured");
@@ -53,22 +55,33 @@ export class AdminEmailComponent implements OnInit {
 
     }
 //refresh data comming from server
-    refreshData() {
-        this.Emails.UpdateData(); 
-    }
-    ngOnInit() {
-
+ 
+    
+    updatedata(){
         this.Emails.GetData()
             .subscribe((data) => {
                 this.data = data;
                 return data;
 
             }),
-            this.refreshData();
             //update every 1 seconds
+           this.button = document.getElementsByClassName("modal-open");
+       
+          if (!this.button) {
+              console.log("ok")
         this.interval = setInterval(() => {
             this.GETdata();
-        }, 10000);
+        }, 5000);
+        
+//this.alert = "<div   class=' reload bg-success'><h3>You have got a message</h3></div>";
+}
+    }
+    
+    ngOnInit() {
+      
+    this.updatedata();
+
+        
     }
 
 
