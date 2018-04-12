@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HandleMailsService } from './../handle-mails.service';
 import { Emails } from '../Emails';
+import {AdminEmailComponent} from '../admin-email/admin-email.component';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class UserEmailComponent implements OnInit  {
    public message_address:string;
    public phone:string;
     
- constructor(private Emails:HandleMailsService,public http: HttpClient ) {
+ constructor( private Emails:HandleMailsService,public http: HttpClient ) {
  
  }  
  submitted = false;
@@ -40,17 +41,20 @@ export class UserEmailComponent implements OnInit  {
       .subscribe(
         (data) => {
           console.log(data);
+           window.location.reload();
         },
         err => {
           console.log("Error occured");
         }
       );
       
-//      console.log(data);
-      
+  }      
+    getlist (){
+       console.log("ok");
+       // window.location.reload();
+}
 
-
-  }  
+    
 
   ngOnInit() {
   }

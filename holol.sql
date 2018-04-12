@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2018 at 03:11 PM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Generation Time: 12 أبريل 2018 الساعة 17:26
+-- إصدار الخادم: 10.1.31-MariaDB
+-- PHP Version: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `email`
+-- بنية الجدول `email`
 --
 
 CREATE TABLE `email` (
@@ -35,14 +37,17 @@ CREATE TABLE `email` (
   `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `email`
+-- بنية الجدول `message_reply`
 --
 
-INSERT INTO `email` (`id`, `name`, `email`, `message_address`, `message`, `phone`) VALUES
-(1, '', '', '', '', ''),
-(2, '', '', '', '', ''),
-(3, '', '', '', '', '');
+CREATE TABLE `message_reply` (
+  `id` int(55) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `message_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -55,6 +60,12 @@ ALTER TABLE `email`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `message_reply`
+--
+ALTER TABLE `message_reply`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -62,7 +73,15 @@ ALTER TABLE `email`
 -- AUTO_INCREMENT for table `email`
 --
 ALTER TABLE `email`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `message_reply`
+--
+ALTER TABLE `message_reply`
+  MODIFY `id` int(55) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

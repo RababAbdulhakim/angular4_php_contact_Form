@@ -95,7 +95,7 @@ class Handle_mail {
             $message = $this->test_input($message_input);
             $phone = $this->test_input($phone_input);
         
-
+if(!empty($name) && !empty($email) &&!empty($message_address) &&!empty($message) &&!empty($phone) ){
  
 
         $sql = "INSERT INTO email (`name`, `email`, `message_address`, `message` , `phone`)
@@ -108,6 +108,7 @@ class Handle_mail {
         }
 
         mysqli_close($conn);
+    }
     }
     
 

@@ -64,25 +64,27 @@ export class AdminEmailComponent implements OnInit {
                 return data;
 
             }),
-            //update every 1 seconds
            this.button = document.getElementsByClassName("modal-open");
        
-          if (!this.button) {
               console.log("ok")
+              if (document.getElementsByClassName("modal-open").length !== 1){
         this.interval = setInterval(() => {
             this.GETdata();
-        }, 5000);
+        }, 100000);
         
 //this.alert = "<div   class=' reload bg-success'><h3>You have got a message</h3></div>";
 }
     }
     
     ngOnInit() {
-      
-    this.updatedata();
+        this.updatedata();
 
         
+    }
+    refresh(){
+        window.location.reload();
     }
 
 
 }
+

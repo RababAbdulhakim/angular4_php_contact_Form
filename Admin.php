@@ -38,7 +38,8 @@ header('Content-Type: application/json');
             $message = $this->test_input($message_input);
             $message_id = $this->test_input($message_id_input);
     
-            
+            if(!empty($message) && !empty($message_id)){
+                
         $sql = "INSERT INTO message_reply (`message`, `message_id`)
        VALUES ('" . $message . "', '" . $message_id . "')";
         if (mysqli_query($conn, $sql)) {
@@ -55,6 +56,7 @@ header('Content-Type: application/json');
         
     }else{
         return json_encode(array("response" => "false"));
+    }
     }
     }
 }
